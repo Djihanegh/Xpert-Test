@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:xpert_test/core/extension/padding.dart';
 
+import '../../../../core/app/style.dart';
 import '../../../../core/core.dart';
 
 class PhaseList extends StatelessWidget {
@@ -11,18 +12,7 @@ class PhaseList extends StatelessWidget {
     const phases = ['Evaluation 1', 'Evaluation 2', 'Master Account'];
     return Container(
         padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
-        decoration: BoxDecoration(
-            color: Color.fromRGBO(255, 255, 255, 0.1),
-            border: Border(
-              top: BorderSide(
-                color: Color.fromRGBO(255, 255, 255, 0.05), // Bottom border color
-                width: 1.14, // Top border thickness
-              ),
-              bottom: BorderSide(
-                color: Color.fromRGBO(255, 255, 255, 0.05), // Bottom border color
-                width: 1.14, // Bottom border thickness
-              ),
-            )),
+        decoration: phaseListDecoration(),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,

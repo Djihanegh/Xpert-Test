@@ -23,5 +23,3 @@ class LabeledTextButton extends StatelessWidget {
     ).pad16();
   }
 }
-
-/*  */

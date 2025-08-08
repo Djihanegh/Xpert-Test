@@ -3,6 +3,7 @@ import 'package:xpert_test/core/core.dart';
 import 'package:xpert_test/core/extension/padding.dart';
 import 'package:xpert_test/feature/account/model/account.dart';
 
+import '../../../../core/app/style.dart';
 import 'header_widget.dart';
 import 'phase_list.dart';
 
@@ -20,18 +21,7 @@ class ChallengeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          color: const Color(0xFF11285F),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            )
-          ],
-        ),
-        //  padding: const EdgeInsets.all(16),
+        decoration: decorationBox(context),
         child: Column(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.start, children: [
           HeaderWidget(isPro: accountModel.isProAccount ?? false, status: getAccountStatus(accountModel.currentPhase ?? 0), statusColor: statusColor),
           _equityWidget(accountModel.balance ?? 0),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xpert_test/core/extension/padding.dart';
 
 import '../../../../core/core.dart';
 
@@ -11,21 +12,18 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-    return Padding(
-        padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16, bottom: 10),
-        child: Row(
-          children: [
-            AutoSizeText(
-              context.l10n.twoStepChallenge,
-              style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w500),
-              maxFontSize: 18,
-            ),
-            const SizedBox(width: 6),
-            if (isPro) CustomBadge(text: context.l10n.pro, backgroundColor: Colors.indigoAccent),
-            const Spacer(),
-            CustomBadge(text: status, backgroundColor: statusColor),
-          ],
-        ));
+    return Row(
+      children: [
+        AutoSizeText(
+          context.l10n.twoStepChallenge,
+          style: context.textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w500),
+          maxFontSize: 18,
+        ),
+        const SizedBox(width: 6),
+        if (isPro) CustomBadge(text: context.l10n.pro, backgroundColor: Colors.indigoAccent),
+        const Spacer(),
+        CustomBadge(text: status, backgroundColor: statusColor),
+      ],
+    ).customPad();
   }
 }

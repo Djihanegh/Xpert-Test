@@ -11,7 +11,7 @@ class PhasePill extends StatelessWidget {
   Widget build(BuildContext context) {
     return Chip(
       label: Text(text),
-      avatar: text == "Master Account" ? Image.asset(Images.unlock) : SvgPicture.asset(Images.chart),
+      avatar: text == context.l10n.masterAccount ? Image.asset(Images.unlock) : SvgPicture.asset(Images.chart),
     );
   }
 }

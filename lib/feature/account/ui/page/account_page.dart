@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../core/core.dart';
 
 class AccountPage extends StatelessWidget {
@@ -6,6 +7,6 @@ class AccountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: const Color(0xFF0B0F2B), body: ChallengeGridView());
+    return Scaffold(body: ChallengeGridView());
   }
 }
