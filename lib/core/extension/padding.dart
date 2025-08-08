@@ -1,0 +1,9 @@
+import 'package:flutter/material.dart';
+
+extension PaddingExtension on Widget {
+  Widget pad8() => Padding(padding: EdgeInsets.all(8), child: this);
+  Widget pad16() => Padding(padding: EdgeInsets.all(16), child: this);
+  Widget padOnlyLeft16() => Padding(padding: EdgeInsets.only(left: 16), child: this);
+  Widget padOnlyLeft16Top5() => Padding(padding: EdgeInsets.only(left: 16.0, top: 5), child: this);
+  Widget padOnlyTop16() => Padding(padding: EdgeInsets.only(top: 15), child: this);
+}

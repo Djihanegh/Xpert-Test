@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 class DateTimeConverter implements JsonConverter<DateTime?, int?> {
@@ -8,4 +9,8 @@ class DateTimeConverter implements JsonConverter<DateTime?, int?> {
 
   @override
   int? toJson(DateTime? dateTime) => dateTime?.millisecondsSinceEpoch;
+}
+
+String formatDateMMMdy(DateTime date) {
+  return DateFormat("MMM d, y").format(date);
 }

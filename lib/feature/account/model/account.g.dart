@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account_model.dart';
+part of 'account.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
-    _AccountModel(
+_Account _$AccountFromJson(Map<String, dynamic> json) => _Account(
       id: json['id'] as String?,
       createdAt: const DateTimeConverter()
           .fromJson((json['createdAt'] as num?)?.toInt()),
@@ -21,8 +20,7 @@ _AccountModel _$AccountModelFromJson(Map<String, dynamic> json) =>
       isProAccount: json['isProAccount'] as bool?,
     );
 
-Map<String, dynamic> _$AccountModelToJson(_AccountModel instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$AccountToJson(_Account instance) => <String, dynamic>{
       'id': instance.id,
       'createdAt': const DateTimeConverter().toJson(instance.createdAt),
       'balance': instance.balance,
