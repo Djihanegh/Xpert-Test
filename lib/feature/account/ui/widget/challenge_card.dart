@@ -58,6 +58,7 @@ Widget _equityWidget(double balance) {
     "\$$balance",
     style: GoogleFonts.inter(color: Colors.white, fontWeight: FontWeight.w600),
     maxFontSize: 47,
+    minFontSize: 25,
   ).padOnlyLeft16();
 }
 
