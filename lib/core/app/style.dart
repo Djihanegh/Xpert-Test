@@ -222,7 +222,7 @@ class AppColors {
   static const Color white60 = Color.fromRGBO(255, 255, 255, 0.6);
 
   static kPrimaryGradient(String text, Color backgroundColor) => LinearGradient(
-        colors: text == text
+        colors: text == 'PRO'
             ? [
                 AppColors.primary,
                 AppColors.secondary,
@@ -253,6 +253,17 @@ Decoration secondaryBoxDecoration(String text, Color color) => BoxDecoration(
       borderRadius: BorderRadius.circular(1140.57),
     );
 
+Decoration decorationBox() => BoxDecoration(
+      color: Color(0xFF11285F),
+      borderRadius: BorderRadius.circular(16),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withValues(alpha: 0.3),
+          blurRadius: 10,
+          offset: const Offset(0, 4),
+        )
+      ],
+    );
 Decoration phaseListDecoration() => BoxDecoration(
     color: Color.fromRGBO(255, 255, 255, 0.1),
     border: Border(
@@ -288,17 +299,5 @@ TextStyle customInterTightTextStyle(Color color, String text) => GoogleFonts.int
               ).createShader(Rect.fromLTWH(0.0, 0.0, 100.0, 20.0)),
       shadows: [
         Shadow(offset: Offset(0, 0), blurRadius: 11.42, color: Color.fromRGBO(171, 194, 255, 0.7)),
-      ],
-    );
-
-Decoration decorationBox(context) => BoxDecoration(
-      color: context.colorScheme.primary,
-      borderRadius: BorderRadius.circular(16),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black.withOpacity(30),
-          blurRadius: 10,
-          offset: const Offset(0, 4),
-        )
       ],
     );

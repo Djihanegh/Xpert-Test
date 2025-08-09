@@ -17,7 +17,7 @@ class CustomBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(1.15),
-        decoration: primaryBoxDecoration(context.l10n.pro, backgroundColor),
+        decoration: primaryBoxDecoration(text, backgroundColor),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
           decoration: secondaryBoxDecoration(text, context.colorScheme.primary),

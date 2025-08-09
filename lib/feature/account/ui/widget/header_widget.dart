@@ -22,7 +22,7 @@ class HeaderWidget extends StatelessWidget {
         const SizedBox(width: 6),
         if (isPro) CustomBadge(text: context.l10n.pro, backgroundColor: Colors.indigoAccent),
         const Spacer(),
-        CustomBadge(text: status, backgroundColor: statusColor),
+        if (!context.isMobile) CustomBadge(text: status, backgroundColor: statusColor),
       ],
     ).customPad();
   }

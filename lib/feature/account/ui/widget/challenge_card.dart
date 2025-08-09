@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:xpert_test/core/app/style.dart';
 import 'package:xpert_test/core/core.dart';
 import 'package:xpert_test/core/extension/padding.dart';
 import 'package:xpert_test/feature/account/model/account.dart';
+import 'package:xpert_test/feature/account/ui/widget/header_widget.dart';
 
-import '../../../../core/app/style.dart';
-import 'header_widget.dart';
 import 'phase_list.dart';
 
 class ChallengeCard extends StatelessWidget {
@@ -20,16 +20,36 @@ class ChallengeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: decorationBox(context),
-        child: Column(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.start, children: [
-          HeaderWidget(isPro: accountModel.isProAccount ?? false, status: getAccountStatus(accountModel.currentPhase ?? 0), statusColor: statusColor),
-          _equityWidget(accountModel.balance ?? 0),
-          BalanceWidget(accountModel: accountModel),
-          PhaseList(),
-          const Spacer(),
-          LabeledTextButton(icon: Images.dashboard, onTap: () {}, label: context.l10n.dashboard)
-        ]));
+    if (context.isMobile) {
+      return Container(
+          decoration: decorationBox(),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.start, children: [
+            Row(
+              children: [
+                CustomBadge(text: 'Funded', backgroundColor: Color(0xFF75DFA7)),
+                SizedBox(
+                  width: 10,
+                ),
+                CustomBadge(text: getAccountStatus(1), backgroundColor: Color(0xFF80A4FE))
+              ],
+            ).padOnlyTop16Left16(),
+            HeaderWidget(isPro: accountModel.isProAccount ?? false, status: getAccountStatus(accountModel.currentPhase ?? 0), statusColor: statusColor),
+            _equityWidget(accountModel.balance ?? 0),
+            BalanceWidget(accountModel: accountModel),
+            LabeledTextButton(icon: Images.dashboard, onTap: () {}, label: context.l10n.dashboard)
+          ]));
+    } else {
+      return Container(
+          decoration: decorationBox(),
+          child: Column(mainAxisSize: MainAxisSize.max, crossAxisAlignment: CrossAxisAlignment.start, children: [
+            HeaderWidget(isPro: accountModel.isProAccount ?? false, status: getAccountStatus(accountModel.currentPhase ?? 0), statusColor: statusColor),
+            _equityWidget(accountModel.balance ?? 0),
+            BalanceWidget(accountModel: accountModel),
+            PhaseList(),
+            const Spacer(),
+            LabeledTextButton(icon: Images.dashboard, onTap: () {}, label: context.l10n.dashboard)
+          ]));
+    }
   }
 }
 

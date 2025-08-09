@@ -11,32 +11,192 @@ class BalanceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(children: [
-      AutoSizeText("${context.l10n.balance} : ", style: context.textTheme.bodyMedium?.copyWith(color: Colors.white60), maxFontSize: 17), //GoogleFonts.inter(color: Colors.white60)
-      AutoSizeText("\$${accountModel.balance ?? 0}", style: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700), maxFontSize: 17),
-      AutoSizeText(" • ", style: TextStyle(color: AppColors.point)),
-      AutoSizeText(
-        "${context.l10n.bought} ",
-        style: context.textTheme.bodyMedium?.copyWith(
-          color: AppColors.white90,
+    final balanceText = "\$${accountModel.balance ?? 0}";
+    final boughtDate = formatDateMMMdy(accountModel.createdAt!);
+    final idText = accountModel.id ?? "";
+
+    if (context.isMobile) {
+      return Column(
+        children: [
+          _InfoRow(
+            label: "${context.l10n.balance}: ",
+            value: balanceText,
+            valueStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+            labelColor: Colors.white60,
+          ),
+          _InfoRowWithIcon(
+            label: "${context.l10n.bought}: ",
+            value: boughtDate,
+            labelColor: AppColors.white60,
+            valueStyle: context.textTheme.bodyMedium?.copyWith(
+              color: AppColors.white90,
+              decoration: TextDecoration.underline,
+              decorationColor: Colors.white,
+              fontWeight: FontWeight.w400,
+            ),
+            iconPath: Images.info,
+          ),
+          _InfoRowWithIcon(
+            label: "${context.l10n.id}: ",
+            value: idText,
+            labelColor: AppColors.white60,
+            valueStyle: context.textTheme.bodyMedium?.copyWith(
+              color: AppColors.white90,
+              fontWeight: FontWeight.w400,
+            ),
+            iconPath: Images.info,
+          ),
+        ],
+      ).padOnlyTop16Left16();
+    } else {
+      return Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          _InfoInline(
+            label: "${context.l10n.balance}: ",
+            value: balanceText,
+            valueStyle: context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+            labelColor: Colors.white60,
+          ),
+          _Separator(),
+          _InfoInline(
+            label: "${context.l10n.bought} ",
+            value: boughtDate,
+            valueStyle: context.textTheme.bodyMedium?.copyWith(
+              color: AppColors.white90,
+              decoration: TextDecoration.underline,
+              fontWeight: FontWeight.w400,
+              decorationColor: Colors.white,
+            ),
+            labelColor: AppColors.white90,
+            trailingIcon: Images.info,
+          ),
+          _Separator(),
+          _InfoInline(
+            label: "${context.l10n.id}: ",
+            value: idText,
+            labelColor: AppColors.white60,
+            trailingIcon: Images.info,
+          ),
+        ],
+      ).padOnlyLeft16Top5();
+    }
+  }
+}
+
+/// Row for wide layout without icons
+class _InfoRow extends StatelessWidget {
+  const _InfoRow({
+    required this.label,
+    required this.value,
+    this.labelColor,
+    this.valueStyle,
+  });
+
+  final String label;
+  final String value;
+  final Color? labelColor;
+  final TextStyle? valueStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        AutoSizeText(
+          label,
+          style: context.textTheme.bodyMedium?.copyWith(color: labelColor),
+          maxFontSize: 17,
         ),
-        maxFontSize: 17,
-      ),
-      AutoSizeText("${formatDateMMMdy(accountModel.createdAt!)} ", style: context.textTheme.bodyMedium?.copyWith(color: AppColors.white90, decoration: TextDecoration.underline, fontWeight: FontWeight.w400, decorationColor: Colors.white), maxFontSize: 17),
-      SvgPicture.asset(
-        Images.info,
-        // Optional: apply color tint
-      ),
-      AutoSizeText("  •  ", style: TextStyle(color: AppColors.point)),
-      AutoSizeText(
-        " ${context.l10n.id}: ${accountModel.id} ",
-        style: context.textTheme.bodyMedium?.copyWith(color: AppColors.white60, fontWeight: FontWeight.w400),
-        maxFontSize: 17,
-      ),
-      SvgPicture.asset(
-        Images.info,
-        // Optional: apply color tint
-      )
-    ]).padOnlyLeft16Top5();
+        AutoSizeText(
+          value,
+          style: valueStyle ?? context.textTheme.bodyMedium,
+          maxFontSize: 17,
+        ),
+      ],
+    );
+  }
+}
+
+/// Row for wide layout with icons
+class _InfoRowWithIcon extends StatelessWidget {
+  const _InfoRowWithIcon({
+    required this.label,
+    required this.value,
+    this.labelColor,
+    this.valueStyle,
+    required this.iconPath,
+  });
+
+  final String label;
+  final String value;
+  final Color? labelColor;
+  final TextStyle? valueStyle;
+  final String iconPath;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        AutoSizeText(
+          label,
+          style: context.textTheme.bodyMedium?.copyWith(color: labelColor),
+          maxFontSize: 17,
+        ),
+        AutoSizeText(
+          "$value ",
+          style: valueStyle ?? context.textTheme.bodyMedium,
+          maxFontSize: 17,
+        ),
+        SvgPicture.asset(iconPath),
+      ],
+    );
+  }
+}
+
+/// Inline layout for narrow mode
+class _InfoInline extends StatelessWidget {
+  const _InfoInline({
+    required this.label,
+    required this.value,
+    this.labelColor,
+    this.valueStyle,
+    this.trailingIcon,
+  });
+
+  final String label;
+  final String value;
+  final Color? labelColor;
+  final TextStyle? valueStyle;
+  final String? trailingIcon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AutoSizeText(
+          label,
+          style: context.textTheme.bodyMedium?.copyWith(color: labelColor),
+          maxFontSize: 17,
+        ),
+        AutoSizeText(
+          value,
+          style: valueStyle ?? context.textTheme.bodyMedium,
+          maxFontSize: 17,
+        ),
+        if (trailingIcon != null) SvgPicture.asset(trailingIcon!),
+      ],
+    );
+  }
+}
+
+class _Separator extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AutoSizeText(
+      " • ",
+      style: TextStyle(color: AppColors.point),
+      maxFontSize: 17,
+    );
   }
 }

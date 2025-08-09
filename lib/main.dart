@@ -19,6 +19,8 @@ class XpertApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       title: 'Flutter Demo',
       theme: lightTheme,
+      themeMode: ThemeMode.light,
+      debugShowCheckedModeBanner: false,
       home: const AccountPage(),
     );
   }

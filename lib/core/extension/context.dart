@@ -12,8 +12,8 @@ extension Context on BuildContext {
 
   AppLocalizations get l10n => AppLocalizations.of(this)!;
 
-  bool get isWide {
+  bool get isMobile {
     final maxWidth = MediaQuery.sizeOf(this).width;
-    return maxWidth > desktopWidthBreakpoint;
+    return maxWidth < desktopWidthBreakpoint;
   }
 }
