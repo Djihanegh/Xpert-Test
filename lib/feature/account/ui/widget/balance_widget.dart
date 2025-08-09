@@ -35,7 +35,7 @@ class BalanceWidget extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
             iconPath: Images.info,
-          ),
+          ).padOnlyTop4(),
           _InfoRowWithIcon(
             label: "${context.l10n.id}: ",
             value: idText,
@@ -45,7 +45,7 @@ class BalanceWidget extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
             iconPath: Images.info,
-          ),
+          ).padOnlyTop4(),
         ],
       ).padOnlyTop16Left16();
     } else {
